@@ -25,13 +25,6 @@
         <link href="css/owl.theme.default.min.css" rel="stylesheet">
 
         <link href="css/templatemo-medic-care.css" rel="stylesheet">
-<!--
-
-TemplateMo 566 Pine Health Foundation
-
-https://templatemo.com/tm-566-medic-care
-
--->
     </head>
     
     <body id="top">
@@ -453,7 +446,7 @@ https://templatemo.com/tm-566-medic-care
                                 
                                 <h2 class="text-center mb-lg-3 mb-2">Book an appointment</h2>
                             
-                                <form role="form" action="appointment.php" method="post">
+                                <form role="form" action="appointment.php" method="post" id="appointmentForm">
                                     <div class="row">
                                         <div class="col-lg-6 col-12">
                                             <input type="text" name="name" id="name" class="form-control" placeholder="Full name" required>
@@ -559,5 +552,30 @@ https://templatemo.com/tm-566-medic-care
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/scrollspy.min.js"></script>
         <script src="js/custom.js"></script>
+
+        <script>
+            document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+            
+                const form = event.target;
+                const formData = new FormData(form);
+            
+                fetch('appointment.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert('Form submitted successfully!');
+                    // Optionally, clear the form fields or perform any other actions
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting the form.');
+                });
+            });
+            </script>
+            
     </body>
 </html>
